@@ -30,7 +30,7 @@ namespace DataHandler
                 outputFile.WriteLine(info.StatesVisited);
                 outputFile.WriteLine(info.StatesProcessed);
                 outputFile.WriteLine(info.DepthSize);
-                outputFile.WriteLine($"{info.Time:N3}");
+                outputFile.WriteLine(info.Time.ToString("F3"));
             }
         }
     }

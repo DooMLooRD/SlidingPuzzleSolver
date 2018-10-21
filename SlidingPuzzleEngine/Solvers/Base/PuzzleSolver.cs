@@ -14,7 +14,7 @@ namespace SlidingPuzzleEngine
         /// <summary>
         /// The time that solve algorithm starts
         /// </summary>
-        public double StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         /// <summary>
         /// Starting state loaded from file
@@ -117,7 +117,7 @@ namespace SlidingPuzzleEngine
         /// </summary>
         public void Solve()
         {
-            StartTime =((double)DateTime.Now.Ticks / TimeSpan.TicksPerSecond) * 1000;
+            StartTime = DateTime.Now;
             //States visited
             int visited = 0;
 
@@ -132,6 +132,8 @@ namespace SlidingPuzzleEngine
                 //Check if state is solved, if its solved Write info to the file
                 if (CurrentState.IsSolved())
                 {
+                    DateTime endTime = DateTime.Now;
+                    TimeSpan span = endTime - StartTime;
                     string path = null;
                     foreach (DirectionEnum directionEnum in CurrentState.Path)
                     {
@@ -150,7 +152,7 @@ namespace SlidingPuzzleEngine
                         SizeOfSolvedPuzzle = CurrentState.Path.Count,
                         StatesVisited = visited,
                         StatesProcessed = visited + StatesCount(),
-                        Time = (double)DateTime.Now.Ticks / TimeSpan.TicksPerSecond * 1000 - StartTime
+                        Time = span.TotalMilliseconds
                     }, InfoPath);
 
                     Console.WriteLine("Done!");

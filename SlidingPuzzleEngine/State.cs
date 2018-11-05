@@ -42,16 +42,13 @@ namespace SlidingPuzzleEngine
         /// </summary>
         public int BlankSpaceIndex { get; set; }
 
-        /// <summary>
-        /// List with Path
-        /// </summary>
-        public List<DirectionEnum> Path { get; set; }
+        public State Parent { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public State(byte dimensionX, byte dimensionY, byte[] grid, DirectionEnum lastMove, int depthLevel, List<DirectionEnum> path)
+        public State(byte dimensionX, byte dimensionY, byte[] grid, DirectionEnum lastMove, int depthLevel, State parent)
         {
             DimensionX = dimensionX;
             DimensionY = dimensionY;
@@ -59,13 +56,24 @@ namespace SlidingPuzzleEngine
             LastMove = lastMove;
             DepthLevel = depthLevel;
             FindBlankSpace();
-            Path = path;
+            Parent = parent;
         }
 
         #endregion
 
         #region Method
 
+        public string GetPath()
+        {
+            string path=String.Empty;
+                
+            if (Parent == null)
+                return path;
+            path +=Parent.GetPath()+ LastMove.ToString()[0];
+            return path;
+
+
+        }
         /// <summary>
         /// Checks if puzzle is solved
         /// </summary>
@@ -144,13 +152,13 @@ namespace SlidingPuzzleEngine
             int blankSpaceX = GetBlankSpaceX();
             int blankSpaceY = GetBlankSpaceY(blankSpaceX);
 
-            if (blankSpaceY > 0 && LastMove != DirectionEnum.Down)
+            if (blankSpaceY > 0 )//&& LastMove != DirectionEnum.Down)
                 moves.Add(DirectionEnum.Up);
-            if (blankSpaceY < DimensionY - 1 && LastMove != DirectionEnum.Up)
+            if (blankSpaceY < DimensionY - 1 )//&& LastMove != DirectionEnum.Up)
                 moves.Add(DirectionEnum.Down);
-            if (blankSpaceX > 0 && LastMove != DirectionEnum.Right)
+            if (blankSpaceX > 0)// && LastMove != DirectionEnum.Right)
                 moves.Add(DirectionEnum.Left);
-            if (blankSpaceX < DimensionX - 1 && LastMove != DirectionEnum.Left)
+            if (blankSpaceX < DimensionX - 1)// && LastMove != DirectionEnum.Left)
                 moves.Add(DirectionEnum.Right);
 
 

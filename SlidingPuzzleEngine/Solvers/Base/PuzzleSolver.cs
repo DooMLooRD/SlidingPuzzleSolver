@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DataHandler;
 
@@ -86,7 +88,7 @@ namespace SlidingPuzzleEngine
             InfoPath = infoPath;
             DimensionX = data.DimensionX;
             DimensionY = data.DimensionY;
-            StartingState = new State(DimensionX, DimensionY, data.Grid, DirectionEnum.None, 0, new List<DirectionEnum>());
+            StartingState = new State(DimensionX, DimensionY, data.Grid, DirectionEnum.None, 0, null);
             CurrentState = StartingState;
         }
 
@@ -105,7 +107,7 @@ namespace SlidingPuzzleEngine
             List<DirectionEnum> allowedMoves = GetAllMoves();
             foreach (var move in allowedMoves)
             {
-                State newPuzzle = new State(DimensionX, DimensionY, CurrentState.Move(move), move, CurrentState.DepthLevel + 1, CurrentState.Path.Append(move).ToList());
+                State newPuzzle = new State(DimensionX, DimensionY, CurrentState.Move(move), move, CurrentState.DepthLevel + 1, CurrentState);
                 AddToStates(newPuzzle);
             }
         }
@@ -117,7 +119,9 @@ namespace SlidingPuzzleEngine
         /// </summary>
         public void Solve()
         {
-            StartTime = DateTime.Now;
+            Stopwatch timer=new Stopwatch();
+            timer.Start();
+            
             //States visited
             int visited = 0;
 
@@ -132,27 +136,21 @@ namespace SlidingPuzzleEngine
                 //Check if state is solved, if its solved Write info to the file
                 if (CurrentState.IsSolved())
                 {
-                    DateTime endTime = DateTime.Now;
-                    TimeSpan span = endTime - StartTime;
-                    string path = null;
-                    foreach (DirectionEnum directionEnum in CurrentState.Path)
-                    {
-                        path += directionEnum.ToString()[0];
-                    }
+                    timer.Stop();
 
                     DataWriter.WriteSolutionToFile(new InformationDataPack()
                     {
-                        SizeOfSolvedPuzzle = CurrentState.Path.Count,
-                        Solution = path,
+                        SizeOfSolvedPuzzle = CurrentState.DepthLevel,
+                        Solution = CurrentState.GetPath(),
                     }, SolutionPath);
 
                     DataWriter.WriteInfoToFile(new InformationDataPack()
                     {
                         DepthSize = MaxDepth,
-                        SizeOfSolvedPuzzle = CurrentState.Path.Count,
+                        SizeOfSolvedPuzzle = CurrentState.DepthLevel,
                         StatesVisited = visited,
                         StatesProcessed = visited + StatesCount(),
-                        Time = span.TotalMilliseconds
+                        Time = timer.Elapsed.TotalMilliseconds
                     }, InfoPath);
 
                     Console.WriteLine("Done!");

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler", "DataHandler\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingPuzzleCommandLine", "SlidingPuzzleCommandLine\SlidingPuzzleCommandLine.csproj", "{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject2", "UnitTestProject2\UnitTestProject2.csproj", "{F6603349-D859-4705-9334-4A2D9CC04634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6603349-D859-4705-9334-4A2D9CC04634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6603349-D859-4705-9334-4A2D9CC04634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6603349-D859-4705-9334-4A2D9CC04634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6603349-D859-4705-9334-4A2D9CC04634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

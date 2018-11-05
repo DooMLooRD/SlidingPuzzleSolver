@@ -50,7 +50,7 @@ namespace SlidingPuzzleEngine
         private int HeuristicFunction(State state)
         {
             byte[] board = state.Grid;
-            int distance = state.Path.Count;
+            int distance = state.DepthLevel;
 
             for (int i = 0; i < DimensionY; i++)
             {

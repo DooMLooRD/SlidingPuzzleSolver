@@ -152,13 +152,13 @@ namespace SlidingPuzzleEngine
             int blankSpaceX = GetBlankSpaceX();
             int blankSpaceY = GetBlankSpaceY(blankSpaceX);
 
-            if (blankSpaceY > 0 )//&& LastMove != DirectionEnum.Down)
+            if (blankSpaceY > 0 && LastMove != DirectionEnum.Down)
                 moves.Add(DirectionEnum.Up);
-            if (blankSpaceY < DimensionY - 1 )//&& LastMove != DirectionEnum.Up)
+            if (blankSpaceY < DimensionY - 1 && LastMove != DirectionEnum.Up)
                 moves.Add(DirectionEnum.Down);
-            if (blankSpaceX > 0)// && LastMove != DirectionEnum.Right)
+            if (blankSpaceX > 0 && LastMove != DirectionEnum.Right)
                 moves.Add(DirectionEnum.Left);
-            if (blankSpaceX < DimensionX - 1)// && LastMove != DirectionEnum.Left)
+            if (blankSpaceX < DimensionX - 1 && LastMove != DirectionEnum.Left)
                 moves.Add(DirectionEnum.Right);
 
 

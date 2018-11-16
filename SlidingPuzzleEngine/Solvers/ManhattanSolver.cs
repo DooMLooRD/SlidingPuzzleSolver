@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Priority_Queue;
 
 namespace SlidingPuzzleEngine
 {
@@ -11,20 +12,24 @@ namespace SlidingPuzzleEngine
         /// <summary>
         /// Queue for heuristic states
         /// </summary>
-        public C5.IntervalHeap<(State, int)> States { get; set; }
+        //public C5.IntervalHeap<(State, int)> States { get; set; }
+        private FastPriorityQueue<State> States { get; set; }
         public ManhattanSolver(State startingState) : base(startingState)
         {
-            States = new C5.IntervalHeap<(State, int)>(
-                Comparer<(State, int)>.Create((t1, t2) =>
-                    t1.Item2 > t2.Item2 ? 1 : t1.Item2 < t2.Item2 ? -1 : 0)) { new ValueTuple<State, int>(StartingState, 0) };
-
+            //  States = new C5.IntervalHeap<(State, int)>(
+            //    Comparer<(State, int)>.Create((t1, t2) =>
+            //        t1.Item2 > t2.Item2 ? 1 : t1.Item2 < t2.Item2 ? -1 : 0)) { new ValueTuple<State, int>(StartingState, 0) };
+            States = new FastPriorityQueue<State>(100_000_000);
+            States.Enqueue(StartingState, 0);
         }
 
         public ManhattanSolver(string startingStatePath, string solutionPath, string infoPath) : base(startingStatePath, solutionPath, infoPath)
         {
-            States = new C5.IntervalHeap<(State, int)>(
-                Comparer<(State, int)>.Create((t1, t2) =>
-                    t1.Item2 > t2.Item2 ? 1 : t1.Item2 < t2.Item2 ? -1 : 0)) { (StartingState, 0) };
+            //States = new C5.IntervalHeap<(State, int)>(
+            //    Comparer<(State, int)>.Create((t1, t2) =>
+            //     t1.Item2 > t2.Item2 ? 1 : t1.Item2 < t2.Item2 ? -1 : 0)) { (StartingState, 0) };
+            States = new FastPriorityQueue<State>(100_000_000);
+            States.Enqueue(StartingState,0);
         }
 
         protected override bool CanMove()
@@ -39,12 +44,14 @@ namespace SlidingPuzzleEngine
 
         protected override void AddToStates(State newPuzzle)
         {
-            States.Add((newPuzzle, HeuristicFunction(newPuzzle)));
+            States.Enqueue(newPuzzle, HeuristicFunction(newPuzzle));
+            //States.Add((newPuzzle, HeuristicFunction(newPuzzle)));
         }
 
         protected override State GetFromStates()
         {
-            return States.DeleteMin().Item1;
+            //return States.DeleteMin().Item1;
+            return States.Dequeue();
         }
 
         protected override int StatesCount()

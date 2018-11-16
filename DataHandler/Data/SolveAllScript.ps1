@@ -23,7 +23,7 @@
 
 param([string]$strategy, [string]$param)
 
-$Progcmd = "& 'D:\Studia\Semestr 5\SISE\SlidingPuzzleSolver\SlidingPuzzleCommandLine\bin\Debug\SlidingPuzzleCommandLine.exe'"
+$Progcmd = "&'D:\Studia\Semestr 5\SISE\SlidingPuzzleSolver\SlidingPuzzleCommandLine\bin\Release\SlidingPuzzleCommandLine.exe'"
 $Orders = @('RDUL', 'RDLU', 'DRUL', 'DRLU', 'LUDR',  'LURD', 'ULDR', 'ULRD')
 $Heuristics = @('hamm', 'manh')
 $InitFilenameRegex = '^[a-zA-Z0-9]+_[0-9]+_[0-9]+.txt$'

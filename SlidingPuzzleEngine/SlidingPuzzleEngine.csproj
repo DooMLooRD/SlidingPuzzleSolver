@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FastPriorityQueue\FastPriorityQueue.cs" />
+    <Compile Include="FastPriorityQueue\FastPriorityQueueNode.cs" />
+    <Compile Include="FastPriorityQueue\IFixedSizePriorityQueue.cs" />
+    <Compile Include="FastPriorityQueue\IPriorityQueue.cs" />
     <Compile Include="Solvers\BFSSolver.cs" />
     <Compile Include="Solvers\DFSSolver.cs" />
     <Compile Include="Solvers\HammingSolver.cs" />

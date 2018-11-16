@@ -52,8 +52,9 @@ namespace SlidingPuzzleEngine
         /// Path to save soultion file
         /// </summary>
         public string SolutionPath { get; set; }
+        public int Visited { get; set; }
 
-
+        public Dictionary<string, int> Explored { get; set; }
         #endregion
 
         #region Constructor
@@ -90,6 +91,8 @@ namespace SlidingPuzzleEngine
             DimensionY = data.DimensionY;
             StartingState = new State(DimensionX, DimensionY, data.Grid, DirectionEnum.None, 0, null);
             CurrentState = StartingState;
+            Explored=new Dictionary<string, int>();
+            Visited = 1;
         }
 
         #endregion
@@ -107,8 +110,14 @@ namespace SlidingPuzzleEngine
             List<DirectionEnum> allowedMoves = GetAllMoves();
             foreach (var move in allowedMoves)
             {
+
                 State newPuzzle = new State(DimensionX, DimensionY, CurrentState.Move(move), move, CurrentState.DepthLevel + 1, CurrentState);
-                AddToStates(newPuzzle);
+                if (!Explored.ContainsKey(newPuzzle.ToString()) ||
+                    Explored[newPuzzle.ToString()] > newPuzzle.DepthLevel)
+                {
+                    AddToStates(newPuzzle);
+                    Visited++;
+                }
             }
         }
 
@@ -119,9 +128,9 @@ namespace SlidingPuzzleEngine
         /// </summary>
         public void Solve()
         {
-            Stopwatch timer=new Stopwatch();
+            Stopwatch timer = new Stopwatch();
             timer.Start();
-            
+
             //States visited
             int visited = 0;
 
@@ -129,6 +138,15 @@ namespace SlidingPuzzleEngine
             {
 
                 CurrentState = GetFromStates();
+
+                if (!Explored.ContainsKey(CurrentState.ToString()))
+                {
+                    Explored.Add(CurrentState.ToString(), CurrentState.DepthLevel);
+                }
+                else if (CurrentState.DepthLevel < Explored[CurrentState.ToString()])
+                {
+                    Explored[CurrentState.ToString()] = CurrentState.DepthLevel;
+                }
 
                 MaxDepth = CurrentState.DepthLevel > MaxDepth ? CurrentState.DepthLevel : MaxDepth;
                 visited++;
@@ -148,8 +166,8 @@ namespace SlidingPuzzleEngine
                     {
                         DepthSize = MaxDepth,
                         SizeOfSolvedPuzzle = CurrentState.DepthLevel,
-                        StatesVisited = visited,
-                        StatesProcessed = visited + StatesCount(),
+                        StatesVisited = Visited,
+                        StatesProcessed = Explored.Count,
                         Time = timer.Elapsed.TotalMilliseconds
                     }, InfoPath);
 

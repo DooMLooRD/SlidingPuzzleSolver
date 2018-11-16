@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Priority_Queue;
 
 namespace SlidingPuzzleEngine
 {
-    public class State
+    public class State : FastPriorityQueueNode
     {
 
         #region Property
@@ -65,11 +66,11 @@ namespace SlidingPuzzleEngine
 
         public string GetPath()
         {
-            string path=String.Empty;
-                
+            string path = String.Empty;
+
             if (Parent == null)
                 return path;
-            path +=Parent.GetPath()+ LastMove.ToString()[0];
+            path += Parent.GetPath() + LastMove.ToString()[0];
             return path;
 
 
@@ -217,6 +218,11 @@ namespace SlidingPuzzleEngine
             byte temp = value1;
             value1 = value2;
             value2 = temp;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",", Grid);
         }
 
         #endregion

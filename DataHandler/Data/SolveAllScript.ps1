@@ -64,6 +64,19 @@ function RunDfs([string]$order) {
     }
 }
 
+function RunIDDfs([string]$order) {
+    Write-Host '===> Strategy: iddfs <==='
+    if ($order) {
+        Write-Host " -> Order: $order"
+        RunProg 'iddfs' $order
+    } else {
+        foreach($o in $Orders) {
+            Write-Host " -> Order: $o"
+            RunProg 'iddfs' $o
+        }
+    }
+}
+
 function RunAstr([string]$heuristic) {
     Write-Host '===> Strategy: astr <==='
     if ($heuristic) {
@@ -77,7 +90,8 @@ function RunAstr([string]$heuristic) {
 }
 
 function RunAll() {	
-    RunBfs
+    RunIDDfs
+	RunBfs
     RunDfs
     RunAstr
 }
@@ -95,6 +109,7 @@ if (!$PSBoundParameters.ContainsKey('strategy')) {
     switch ($strategy.ToLower()) {
         'bfs'  { RunBfs $param }
         'dfs'  { RunDfs $param }
+        'iddfs'  { RunIDDfs $param }
         'astr' { RunAstr $param }
         default {
             Write-Error $("Unrecognized strategy: '{0}'." -f $strategy)

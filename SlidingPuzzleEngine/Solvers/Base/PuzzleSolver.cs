@@ -102,7 +102,7 @@ namespace SlidingPuzzleEngine
         /// <summary>
         /// Method that appends priority queue with new states from allowed moves for current state.
         /// </summary>
-        private void AppendWithChildren()
+        protected void AppendWithChildren()
         {
             if (!CanMove())
                 return;
@@ -126,7 +126,7 @@ namespace SlidingPuzzleEngine
         /// <summary>
         /// Solve puzzle with selected function
         /// </summary>
-        public void Solve()
+        public virtual void Solve()
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();

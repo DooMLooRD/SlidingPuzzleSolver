@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SlidingPuzzleEngine;
+using SlidingPuzzleEngine.Solvers;
 
 namespace SlidingPuzzleCommandLine
 {
@@ -32,6 +33,12 @@ namespace SlidingPuzzleCommandLine
                             break;
 
                         }
+                    case "iddfs":
+                    {
+                        solver = new IterativeDeepeningDFSSolver(args[1], path + args[2], path + args[3], path + args[4]);
+                        break;
+
+                    }
                     case "astr":
                         {
                             if (args[1] == "hamm")

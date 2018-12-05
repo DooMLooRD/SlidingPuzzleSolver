@@ -91,11 +91,8 @@ namespace SlidingPuzzleEngine.Solvers
 
                     Console.WriteLine("Done!");
                     return;
-                }
-                    
+                }                   
             }
-
-
         }
 
         protected override bool CanMove()

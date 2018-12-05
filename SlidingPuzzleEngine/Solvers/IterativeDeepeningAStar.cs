@@ -65,7 +65,7 @@ namespace SlidingPuzzleEngine.Solvers
                 DepthSize = MaxDepth,
                 SizeOfSolvedPuzzle = SolvedState?.DepthLevel ?? -1,
                 StatesVisited = Visited,
-                StatesProcessed = ExploredCounter,
+                StatesProcessed = Visited,
                 Time = timer.Elapsed.TotalMilliseconds
             }, InfoPath);
         }
@@ -86,21 +86,17 @@ namespace SlidingPuzzleEngine.Solvers
             foreach (var move in moves)
             {
                 State state = new State(DimensionX, DimensionY, currentForChildren.Move(move), move, currentForChildren.DepthLevel + 1, currentForChildren);
-                //if (!States.Contains(state,
-                //    new EqualityComparer<State>((s1, s2) => s1.ToString().Equals(s2.ToString()))))
-                //{
-                    States.Push(state);
-                    Visited++;
-                    var result = Search(bound);
-                    if (result.Item1)
-                    {
-                        return (true, heuristicFunction);
-                    }
+                States.Push(state);
+                Visited++;
+                var result = Search(bound);
+                if (result.Item1)
+                {
+                    return (true, heuristicFunction);
+                }
 
-                    if (result.Item2 < min)
-                        min = result.Item2;
-                    States.Pop();
-                //}
+                if (result.Item2 < min)
+                    min = result.Item2;
+                States.Pop();
             }
 
             return (false, min);

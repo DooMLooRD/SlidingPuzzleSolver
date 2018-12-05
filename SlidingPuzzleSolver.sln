@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingPuzzleView", "SlidingPuzzleView\SlidingPuzzleView.csproj", "{F5E77A24-9B1B-4989-9EAC-97ED37C09234}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingPuzzleEngine", "SlidingPuzzleEngine\SlidingPuzzleEngine.csproj", "{F32252DE-7A53-43FF-8BD1-77BF4D05B4AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler", "DataHandler\DataHandler.csproj", "{34B0A965-F5E8-40BC-A683-BEA7021962BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlidingPuzzleCommandLine", "SlidingPuzzleCommandLine\SlidingPuzzleCommandLine.csproj", "{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject2", "UnitTestProject2\UnitTestProject2.csproj", "{F6603349-D859-4705-9334-4A2D9CC04634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F5E77A24-9B1B-4989-9EAC-97ED37C09234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5E77A24-9B1B-4989-9EAC-97ED37C09234}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5E77A24-9B1B-4989-9EAC-97ED37C09234}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5E77A24-9B1B-4989-9EAC-97ED37C09234}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F32252DE-7A53-43FF-8BD1-77BF4D05B4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F32252DE-7A53-43FF-8BD1-77BF4D05B4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F32252DE-7A53-43FF-8BD1-77BF4D05B4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +27,6 @@ Global
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBFA5132-A68E-4EDE-972C-5FB8AA8A56D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6603349-D859-4705-9334-4A2D9CC04634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6603349-D859-4705-9334-4A2D9CC04634}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6603349-D859-4705-9334-4A2D9CC04634}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6603349-D859-4705-9334-4A2D9CC04634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

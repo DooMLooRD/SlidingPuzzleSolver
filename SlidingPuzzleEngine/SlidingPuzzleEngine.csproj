@@ -53,6 +53,7 @@
     <Compile Include="Solvers\BFSSolver.cs" />
     <Compile Include="Solvers\DFSSolver.cs" />
     <Compile Include="Solvers\HammingSolver.cs" />
+    <Compile Include="Solvers\IterativeDeepeningAStar.cs" />
     <Compile Include="Solvers\IterativeDeepeningDFSSolver.cs" />
     <Compile Include="Solvers\ManhattanSolver.cs" />
     <Compile Include="Solvers\Base\PuzzleSolver.cs" />

@@ -55,6 +55,8 @@ namespace SlidingPuzzleEngine
         public int Visited { get; set; }
 
         public Dictionary<string, int> Explored { get; set; }
+
+        public State SolvedState { get; set; }
         #endregion
 
         #region Constructor
@@ -91,7 +93,7 @@ namespace SlidingPuzzleEngine
             DimensionY = data.DimensionY;
             StartingState = new State(DimensionX, DimensionY, data.Grid, DirectionEnum.None, 0, null);
             CurrentState = StartingState;
-            Explored=new Dictionary<string, int>();
+            Explored = new Dictionary<string, int>();
             Visited = 1;
         }
 
@@ -132,7 +134,6 @@ namespace SlidingPuzzleEngine
             timer.Start();
 
             //States visited
-            int visited = 0;
 
             while (StatesCount() > 0)
             {
@@ -149,34 +150,36 @@ namespace SlidingPuzzleEngine
                 }
 
                 MaxDepth = CurrentState.DepthLevel > MaxDepth ? CurrentState.DepthLevel : MaxDepth;
-                visited++;
 
                 //Check if state is solved, if its solved Write info to the file
                 if (CurrentState.IsSolved())
                 {
+
                     timer.Stop();
-
-                    DataWriter.WriteSolutionToFile(new InformationDataPack()
-                    {
-                        SizeOfSolvedPuzzle = CurrentState.DepthLevel,
-                        Solution = CurrentState.GetPath(),
-                    }, SolutionPath);
-
-                    DataWriter.WriteInfoToFile(new InformationDataPack()
-                    {
-                        DepthSize = MaxDepth,
-                        SizeOfSolvedPuzzle = CurrentState.DepthLevel,
-                        StatesVisited = Visited,
-                        StatesProcessed = Explored.Count,
-                        Time = timer.Elapsed.TotalMilliseconds
-                    }, InfoPath);
-
+                    SolvedState = CurrentState;
                     Console.WriteLine("Done!");
-                    return;
+                    break;
                 }
 
                 AppendWithChildren();
             }
+            if (timer.IsRunning)
+                timer.Stop();
+
+            DataWriter.WriteSolutionToFile(new InformationDataPack
+            {
+                SizeOfSolvedPuzzle = SolvedState?.DepthLevel ?? -1,
+                Solution = SolvedState?.GetPath() ?? "",
+            }, SolutionPath);
+
+            DataWriter.WriteInfoToFile(new InformationDataPack
+            {
+                DepthSize = MaxDepth,
+                SizeOfSolvedPuzzle = SolvedState?.DepthLevel ?? -1,
+                StatesVisited = Visited,
+                StatesProcessed = Explored.Count,
+                Time = timer.Elapsed.TotalMilliseconds
+            }, InfoPath);
         }
 
 

@@ -10,8 +10,8 @@ namespace SlidingPuzzleEngine.Solvers
 {
     public class IterativeDeepeningDFSSolver : PuzzleSolver
     {
-        private int _explored = 0;
-        private int _depthLevel = 0;
+        private int _explored;
+        private int _depthLevel;
 
         public Stack<State> States { get; set; }
         public List<DirectionEnum> Order { get; set; }
@@ -32,6 +32,7 @@ namespace SlidingPuzzleEngine.Solvers
             States.Clear();
             Explored.Clear();
             States.Push(root);
+            Visited++;
             while (StatesCount() > 0)
             {
 
@@ -84,7 +85,7 @@ namespace SlidingPuzzleEngine.Solvers
                         DepthSize = MaxDepth,
                         SizeOfSolvedPuzzle = CurrentState.DepthLevel,
                         StatesVisited = Visited,
-                        StatesProcessed = Explored.Count,
+                        StatesProcessed = _explored,
                         Time = timer.Elapsed.TotalMilliseconds
                     }, InfoPath);
 

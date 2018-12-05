@@ -20,12 +20,12 @@
 #$Progcmd = 'D:\Studia\Semestr 5\SISE\Data\SlidingPuzzleCommandLine.exe'
 #  $Progcmd = 'java -jar C:\Users\User\15puzzle\bin\solver.jar' (executable JAR file)
 #  $Progcmd = python C:\Users\User\15puzzle\bin\solver.py' (Python file)
-
+#'hamm', 'manh',
 param([string]$strategy, [string]$param)
 
 $Progcmd = "&'D:\Studia\Semestr 5\SISE\SlidingPuzzleSolver\SlidingPuzzleCommandLine\bin\Release\SlidingPuzzleCommandLine.exe'"
 $Orders = @('RDUL', 'RDLU', 'DRUL', 'DRLU', 'LUDR',  'LURD', 'ULDR', 'ULRD')
-$Heuristics = @('hamm', 'manh')
+$Heuristics = @( 'idastr')
 $InitFilenameRegex = '^[a-zA-Z0-9]+_[0-9]+_[0-9]+.txt$'
 
 function RunProg([string]$strategy, [string]$param) {
@@ -90,9 +90,9 @@ function RunAstr([string]$heuristic) {
 }
 
 function RunAll() {	
-    RunIDDfs
-	RunBfs
-    RunDfs
+	#RunIDDfs
+	#RunBfs
+    #RunDfs
     RunAstr
 }
 

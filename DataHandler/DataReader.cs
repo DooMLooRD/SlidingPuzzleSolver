@@ -17,9 +17,9 @@ namespace DataHandler
             {
 
                 String[] line = sr.ReadLine()?.Split(' ', '\r', '\n');
-                byte x = byte.Parse(line[0]);
+                byte y = byte.Parse(line[0]);
 
-                byte y = byte.Parse(line[1]);
+                byte x = byte.Parse(line[1]);
 
                 List<string> gridString = new List<string>();
                 for (int i = 0; i < y; i++)
